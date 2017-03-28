@@ -19,15 +19,16 @@ email: juan@juanagui.com
 description: > # this means to ignore newlines until "baseurl:"
   Juan Agüí is the co-founder of Tesla Cool Lab and loves writing about coding and education.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://juanagui.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: juanagui
 github_username:  jagui
 google_analytics: UA-38637826-2
 avatar: juanagui.jpg
 email: juan@juanagui.com
-github: jagui # username
+github: jagui
 twitter: juanagui
 linkedin: juanagui
+disqus: juanagui.disqus.com
 
 #Resume
 name: Juan Agüí

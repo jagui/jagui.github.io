@@ -3,6 +3,7 @@ layout: post
 title: A LEGO &reg; MINDSTORMS&reg; EV3 Polygon Gyrotracker
 categories: mindstorms
 tags: [ mindstorms, EV3, STEM, polygons, gyro sensor]
+comments: true
 ---
 ![Polygon Gyrotracker]({{ site.baseurl }}/assets/polygon-gyro-tracker/featured-image.jpg){: .featured-image}
 
