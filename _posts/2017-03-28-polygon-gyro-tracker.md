@@ -33,7 +33,7 @@ Once the students have completed the table with the polygons from the triangle t
 As per this (somewhat obscure) [definition](https://www.mathsisfun.com/geometry/exterior-angles.html),
 >The Exterior Angle is the angle between any side of a shape, and a line extended from the next side.
 
-Let's shed some light in this by taking a look at the diagram below, where we can see that the interior angle is part of arc filled in blue, whereas the exterior angle is the one filled in white:
+Let's shed some light on this by taking a look at the diagram below, where we can see that the interior angle is part of arc filled in blue, whereas the exterior angle is the one filled in white:
 ![Exterior Angle]({{ site.baseurl }}/assets/polygon-gyro-tracker/exterior-angle.png){: .responsive-image }
 
 Before moving forward, let's pause for a second and make a few experiments involving these angles:
@@ -127,7 +127,7 @@ In this lesson we learned how to build a somewhat complex program with user inpu
 
 Feel free to download the [full Poylgon Gyro Tracker]({{site.baseurl }}/assets/polygon-gyro-tracker/polygon-gyro-tracker.ev3) EV3 project.
 
-Stay tuned for more lessons and remember to check my company's site [Tesla Cool Lab](http://teslacoollab.com) for furher info and resources.
+Stay tuned for more lessons and remember to check my company's site [Tesla Cool Lab](http://teslacoollab.com) for further info and resources.
 
 ## Disclaimer
 
