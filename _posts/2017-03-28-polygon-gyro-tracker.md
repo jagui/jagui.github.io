@@ -36,9 +36,9 @@ Let's shed some light in this by taking a look at the diagram below, where we ca
 ![Exterior Angle]({{ site.baseurl }}/assets/polygon-gyro-tracker/exterior-angle.png){: .responsive-image }
 
 Before moving forward, let's pause for a second and make a few experiments involving these angles:
-- [ ] Calculate the sum of the interior and exterior angles. They add up to 180&deg;, hence they are _supplementary angles_.
-- [ ] Now try this: draw a polygon with chalk on the floor, for instance, a square. Put the Robot Educator on one of the corners and push it along the sides. Note how much you turn on each corner... _Yes: it's the exterior angle!_
-- [ ] Go round the square along the sides, turning on all corners until completing one full loop. You should reach the starting point facing the same direction, which means that all the turns you made add up to a full 360&deg; turn, that is: `exterior angle * number of turns = 360`.
+1. Calculate the sum of the interior and exterior angles. They add up to 180&deg;, hence they are _supplementary angles_.
+2. Now try this: draw a polygon with chalk on the floor, for instance, a square. Put the Robot Educator on one of the corners and push it along the sides. Note how much you turn on each corner... _Yes: it's the exterior angle!_
+3. Go round the square along the sides, turning on all corners until completing one full loop. You should reach the starting point facing the same direction, which means that all the turns you made add up to a full 360&deg; turn, that is: `exterior angle * number of turns = 360`.
 
 Therefore, the exterior angle for a regular polygon can be calculated as:
 ```
