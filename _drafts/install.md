@@ -34,8 +34,8 @@ copy pub key to authorized_keys
 ```
 chmod 600 .ssh/authorized_keys
 ```
-
 Disable Root Login and password authentication in /etc/ssh/sshd_config
+
 ```
 PermitRootLogin no
 PasswordAuthentication no
@@ -166,8 +166,7 @@ Then run mysql as root and add create databases, users and grant them permission
 ```
 CREATE DATABASE 'dosancom_mydoctor';
 CREATE USER 'dosancom_mydocto'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON `dosancom\_mydoctor`.* TO 'dosancom_mydocto'@'localhost' WITH GRANT 
-OPTION;
+GRANT ALL PRIVILEGES ON `dosancom\_mydoctor`.* TO 'dosancom_mydocto'@'localhost' WITH GRANT OPTION;
 ```
 Import the database
 ```
@@ -191,7 +190,7 @@ This can be overriden by a custom php config value in the `.htaccess` file of th
 ```
 php_value default_charset " "
 ```
-
+*Not if you're using fastcgi*
 
 # Configuring phpmyadmin
 
@@ -273,7 +272,7 @@ Allow accessing filesystem in `wp-config.php`
 
 mcrypt (for redsys)
 ```
-apt install php5-mcrypt
+sudo apt install php5-mcrypt
 sudo php5enmod mcrypt
 sudo service apache2 restart
 ```
@@ -425,9 +424,6 @@ paste in the following (we'll use a socket instead of IP address)
 
 Note: Ensure all configs follow the same new 'Require all granted'/'Require all denied' syntax ... Otherwise you'll feel the pain after restarting ...
 
-Enable the php5-fpm conf
-
-sudo a2enconf php5-fpm
 
 Restart apache and fpm
 
@@ -611,3 +607,22 @@ Checking memory consumption
 ```
 ps -eo size,pid,user,command | sort -k1 -rn | head -20 | awk '{ hr=$1/1024 ; printf("%13.6f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' 
 ```
+
+
+# Docker
+
+sudo docker run -h dosan-dev --user juan -it dosan /bin/bash
+
+
+# XDEBUG
+
+Config on `/etc/php5/mods-available/xdebug.ini`
+
+```
+zend_extension=xdebug.so
+xdebug.remote_enable=1
+# So that it doesn't collide with fastcgi port 9000
+xdebug.remote_port=9001
+xdebug.remote_connect_back=1
+```
+Then restart `service php5-fpm restart`
