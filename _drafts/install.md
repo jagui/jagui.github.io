@@ -266,7 +266,7 @@ sudo chmod -R g+w .
 Allow accessing filesystem in `wp-config.php`
 
 ```
-  define('FS_METHOD','direct');¬
+define('FS_METHOD','direct');¬
 ```
 # Configuring Prestashop
 
