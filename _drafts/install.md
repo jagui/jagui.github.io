@@ -614,6 +614,9 @@ ps -eo size,pid,user,command | sort -k1 -rn | head -20 | awk '{ hr=$1/1024 ; pri
 sudo docker run -h dosan-dev --user juan -it dosan /bin/bash
 
 
+sudo docker run -h dosan-dev --user juan -v /home/juan/projects/moremadrid.com/:/home/juan/web/dodepecho.com -it dosan /bin/bash
+
+
 # XDEBUG
 
 Config on `/etc/php5/mods-available/xdebug.ini`
