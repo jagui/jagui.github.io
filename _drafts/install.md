@@ -16,7 +16,7 @@ Add it to the sudo group
 
 ```
 # gpasswd -a juan sudo
-``` 
+```
 su juan
 
 generate ssh-key pair on local machine
@@ -26,10 +26,10 @@ __keep the private key safe__
 copy pub key and
 
 ```
-chmod 700 .ssh 
+chmod 700 .ssh
 ```
 
-copy pub key to authorized_keys 
+copy pub key to authorized_keys
 
 ```
 chmod 600 .ssh/authorized_keys
@@ -73,7 +73,7 @@ Use `/etc/apache2/sites-available/000-default.conf` as a template
      # value is not decisive as it is used as a last resort host regardless.
      # However, you must set it for any further virtual host explicitly.
      #ServerName www.example.com
-                
+
      ServerAdmin tech@clinicasantamarta.com
      ServerName mydoctorinmadrid.com
      ServerAlias www.mydoctorinmadrid.com
@@ -82,30 +82,30 @@ Use `/etc/apache2/sites-available/000-default.conf` as a template
      CustomLog ${APACHE_LOG_DIR}/mydoctorinmadrid.access.log combined
 
      <Directory /home/juan/web/mydoctorinmadrid.com/>
-          
+
           # Configures what features are available in a particular directory
           # Indexes If a URL which maps to a directory is requested and there is no DirectoryIndex
           # will return a formatted listing of the directory. Disabled.
-          
-          Options -Indexes 
-          
+
+          Options -Indexes
+
           # Types of directives that are allowed in .htaccess files
           # When this directive is set to All, then any directive which has the .htaccess Context
           # is allowed in .htaccess files.
-          
+
           AllowOverride All
-          
+
           # Tests whether an authenticated user is authorized by an authorization provider
           # In this case access is allowed unconditionally.
-          
+
           Require all granted
-          
+
      </Directory>
 </VirtualHost>
 
 ```
 
-Enable site 
+Enable site
 ```
 sudo a2ensite mydoctorinmadrid.com.conf
 ```
@@ -165,12 +165,12 @@ Then run mysql as root and add create databases, users and grant them permission
 
 ```
 CREATE DATABASE 'dosancom_mydoctor';
-CREATE USER 'dosancom_mydocto'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'dosancom_mydoctor'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON `dosancom\_mydoctor`.* TO 'dosancom_mydocto'@'localhost' WITH GRANT OPTION;
 ```
 Import the database
 ```
-mysql -u username -p database_name < file.sql 
+mysql -u username -p database_name < file.sql
 ```
 
 # Configuring php
@@ -206,7 +206,7 @@ Edit `/etc/apache2/apache2.conf` and include the phpmyadmin config:
 
 ```
 Include /etc/phpmyadmin/apache.conf
-``` 
+```
 
 
 Change the alias to something not predictable by changing
@@ -218,7 +218,7 @@ to
 Alias /somethingnotpredictable
 ```
 
-Restrict access to your IP by 
+Restrict access to your IP by
 ```
 <Directory /usr/share/phpmyadmin>
     Require all denied
@@ -251,7 +251,7 @@ Add user to www-data (apache2) group
 ```
 sudo usermod -a -G www-data juan
 ```
- 
+
 Then change the group of your files
 ```
 sudo chown -R juan:www-data .
@@ -300,14 +300,14 @@ http://doc.prestashop.com/display/PS16/System+Administrator+Guide
   * Never enable all at once
   * Turn them on one by one and measure
 
-* Ciphering 
+* Ciphering
   * Use Rijndael with mcrypt lib. (you must install the Mcrypt extension)
 
 * OPCache
   * http://php.net/manual/en/opcache.installation.php
   * __TODO__
 
-* Images 
+* Images
   * __TODO__
   * upload images on display size
   * use comprespng.com
@@ -315,13 +315,13 @@ http://doc.prestashop.com/display/PS16/System+Administrator+Guide
 * Displayed blocks
   * __TODO__
   *  Use hotjar.com
- 
+
  * Truncate big (useless) tables
 ```
 TRUNCATE TABLE `ms_connections`;
- 
+
 TRUNCATE TABLE `ms_connections_page`;
- 
+
 TRUNCATE TABLE `ms_connections_source`;
 
 TRUNCATE TABLE `ms_guest`;
@@ -360,7 +360,7 @@ https://www.linode.com/docs/web-servers/apache/install-php-fpm-and-apache-on-deb
 http://blog.starcklin.com/2013/08/install-mod-fastcgi-and-php5-fpm-on-ubuntu/
 http://stackoverflow.com/questions/30762854/specify-php-ini-file-per-vhost-with-fastcgi-php-fpm-configuration
 http://stackoverflow.com/a/30824878/168435
-	
+
 
 I thought I may as-well post the whole process I took to configure fpm with pools, as @ChristianM mentioned, because I've not yet found a full explanation on how to do it.
 
@@ -373,7 +373,7 @@ Here it goes:
 Install the apache mpm worker (Explanation of prefork/wroker and event at http://www.vps.net/blog/2013/04/08/apache-mpms-prefork-worker-and-event/):
 ```
 sudo apt-get install apache2-mpm-worker
-`` 
+``
 
 Install fastcgi and php5-fpm:
 ```
@@ -401,18 +401,18 @@ paste in the following (we'll use a socket instead of IP address)
 ```
 <IfModule mod_fastcgi.c>
   FastCgiIpcDir /var/lib/apache2/fastcgi
-  
+
   # Creates the /php5.fcgi alias for the /var/www/cgi-bin/php5.fcgi
   Alias /php5.fcgi /var/www/cgi-bin/php5.fcgi
-  
+
   # Activates a CGI script for a particular handler or content-type
-  # Syntax: Action action-type cgi-script 
-  Action php5.fcgi /php5.fcgi 
-  
+  # Syntax: Action action-type cgi-script
+  Action php5.fcgi /php5.fcgi
+
   #	Maps the filename extensions to the specified handler
   # Syntax: AddHandler handler-name extension [extension] ...
-  AddHandler php5.fcgi .php 
-  
+  AddHandler php5.fcgi .php
+
   FastCGIExternalServer /var/www/cgi-bin/php5.fcgi -socket /var/run/php5-fpm.sock -pass-header Authorization -idle-timeout 3600
 
   <Directory "/var/www/cgi-bin">
@@ -554,7 +554,7 @@ php_admin_value[session.name] = 'DOMAIN2'
 
 [...]
 
-OR 
+OR
 
 ```
 php_value[default_charset] = " "
@@ -600,12 +600,12 @@ And finally, if you want to be super sure the php value has been set, create inf
 ?>
 
 
-# Maintenance 
+# Maintenance
 
 Checking memory consumption
 
 ```
-ps -eo size,pid,user,command | sort -k1 -rn | head -20 | awk '{ hr=$1/1024 ; printf("%13.6f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' 
+ps -eo size,pid,user,command | sort -k1 -rn | head -20 | awk '{ hr=$1/1024 ; printf("%13.6f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }'
 ```
 
 
@@ -615,6 +615,19 @@ sudo docker run -h dosan-dev --user juan -it dosan /bin/bash
 
 
 sudo docker run -h dosan-dev --user juan -v /home/juan/projects/moremadrid.com/:/home/juan/web/dodepecho.com -it dosan /bin/bash
+
+sudo docker run -h dosan-dev --user juan \
+--dns 127.0.0.1 --dns 8.8.8.8 \
+-v /home/juan/projects/moremadrid.com/:/home/juan/web/dodepecho.com \
+-v /home/juan/projects/vanilla.com/:/home/juan/web/vanilla.com \
+-it dosan /bin/bash
+
+
+add --dns 127.0.0.1 to avoid slow connections when the host has no network
+
+
+
+sudo docker run -h dosan-dev --user juan --dns 127.0.0.1 --dns 8.8.8.8 -v /home/juan/projects:/home/juan/web -it dosan /bin/bash
 
 
 # XDEBUG
@@ -629,3 +642,19 @@ xdebug.remote_port=9001
 xdebug.remote_connect_back=1
 ```
 Then restart `service php5-fpm restart`
+
+
+# Memcahed
+
+Install on php5
+```
+sudo apt install php5-memcached memcached
+sudo service memcached start
+sudo service php5-fpm restart
+```
+
+Ensure it starts on boot
+```
+sudo update-rc.d memcached enable
+sudo update-rc.d memcached defaults
+```
