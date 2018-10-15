@@ -373,7 +373,7 @@ Here it goes:
 Install the apache mpm worker (Explanation of prefork/wroker and event at http://www.vps.net/blog/2013/04/08/apache-mpms-prefork-worker-and-event/):
 ```
 sudo apt-get install apache2-mpm-worker
-``
+```
 
 Install fastcgi and php5-fpm:
 ```
@@ -459,6 +459,7 @@ cp /usr/lib/cgi-bin/php5.fcgi /usr/lib/cgi-bin/php5-domain2.fcgi
 
 Now you're ready to add the mod_fastcgi module to the domain2 vhost. It's almost the same as the one described above, but notice the changes for 'Alias','FastCgiServer' and '-socket'
 
+```
 <VirtualHost *:80>
    ServerName domain2.com
 
@@ -477,12 +478,12 @@ Now you're ready to add the mod_fastcgi module to the domain2 vhost. It's almost
   [...]
 
 </VirtualHost>
-
+```
 
 Test configuration
 
 ```
-apache2ctl configtest
+  apache2ctl configtest
 ```
 
 Expect for `Syntax OK`
@@ -521,6 +522,7 @@ cp /usr/lib/cgi-bin/php5.fcgi /usr/lib/cgi-bin/php5-domain2.fcgi
 
 Now you're ready to add the mod_fastcgi module to the domain2 vhost. It's almost the same as the one described above, but notice the changes for 'Alias','FastCgiServer' and '-socket'
 
+```
 <VirtualHost *:80>
    ServerName domain2.com
 
@@ -539,6 +541,7 @@ Now you're ready to add the mod_fastcgi module to the domain2 vhost. It's almost
   [...]
 
 </VirtualHost>
+```
 
 Restart apache and fpm
 
@@ -570,35 +573,34 @@ sudo service php5-fpm restart
 
 And finally, if you want to be super sure the php value has been set, create info.php within your site, and just add:
 
+```
 <?php
   phpinfo();
 ?>
-
+```
 
 Now to test changes.
 
 In your new /etc/php5/fpm/pool.d/domain2.conf file, add a php value change (I've chosen the session.name value):
-
+```
 [...]
-
 php_admin_value[session.name] = 'DOMAIN2'
-
 [...]
-
+```
 Now test the configuration before restarting fpm:
 
-sudo php5-fpm -t
+`sudo php5-fpm -t`
 
 It will tell you if the configuration fails, but more importantly will tell you if your configuration is fine. Then you can go ahead and restart fpm:
 
-sudo service php5-fpm restart
+`sudo service php5-fpm restart`
 
 And finally, if you want to be super sure the php value has been set, create info.php within your site, and just add:
-
+```
 <?php
   phpinfo();
 ?>
-
+```
 
 # Maintenance
 
@@ -611,40 +613,21 @@ ps -eo size,pid,user,command | sort -k1 -rn | head -20 | awk '{ hr=$1/1024 ; pri
 
 # Docker
 
-sudo docker run -h dosan-dev --user juan -it dosan /bin/bash
+`sudo docker run -h dosan-dev --user juan -it dosan /bin/bash`
 
+`sudo docker run -h dosan-dev --user juan -v /home/juan/projects/moremadrid.com/:/home/juan/web/dodepecho.com -it dosan /bin/bash`
 
-sudo docker run -h dosan-dev --user juan -v /home/juan/projects/moremadrid.com/:/home/juan/web/dodepecho.com -it dosan /bin/bash
-
-sudo docker run -h dosan-dev --user juan \
+`sudo docker run -h dosan-dev --user juan \
 --dns 127.0.0.1 --dns 8.8.8.8 \
 -v /home/juan/projects/moremadrid.com/:/home/juan/web/dodepecho.com \
 -v /home/juan/projects/vanilla.com/:/home/juan/web/vanilla.com \
--it dosan /bin/bash
+-it dosan /bin/bash`
 
+add `--dns 127.0.0.1` to avoid slow connections when the host has no network
 
-add --dns 127.0.0.1 to avoid slow connections when the host has no network
+`sudo docker run -h dosan-dev --user juan --dns 127.0.0.1 --dns 8.8.8.8 -v /home/juan/projects:/home/juan/web -it dosan /bin/bash`
 
-
-
-sudo docker run -h dosan-dev --user juan --dns 127.0.0.1 --dns 8.8.8.8 -v /home/juan/projects:/home/juan/web -it dosan /bin/bash
-
-
-# XDEBUG
-
-Config on `/etc/php5/mods-available/xdebug.ini`
-
-```
-zend_extension=xdebug.so
-xdebug.remote_enable=1
-# So that it doesn't collide with fastcgi port 9000
-xdebug.remote_port=9001
-xdebug.remote_connect_back=1
-```
-Then restart `service php5-fpm restart`
-
-
-# Memcahed
+# Memcached
 
 Install on php5
 ```
@@ -658,3 +641,190 @@ Ensure it starts on boot
 sudo update-rc.d memcached enable
 sudo update-rc.d memcached defaults
 ```
+
+# PHP7
+
+* `apt-get install php5-cli php5-comon php5-cli -o Dpkg::Options::=--force-confmiss`
+
+
+## FPM
+
+`apt-get -y install libapache2-mod-fastcgi php7.0-fpm php7.0`
+
+or
+
+`apt-get -y install libapache2-mod-fastcgi php-fpm php php-mbstring php-xml php-gd php-mcrypt php-curl php-imap php-mysql -o Dpkg::Options::=--force-confmiss`
+
+```
+mkdir /var/www/cgi-bin
+touch /var/www/cgi-bin/php7.fcgi
+chown -R www-data:www-data /var/www/cgi-bin
+```
+
+edit `/etc/apache2/mods-enabled/fastcgi.conf`
+
+```
+<IfModule mod_fastcgi.c>
+  FastCgiIpcDir /var/lib/apache2/fastcgi
+
+  # Creates the /php7.fcgi alias for the /var/www/cgi-bin/php7.fcgi
+  Alias /php7.fcgi /var/www/cgi-bin/php7.fcgi
+
+  # Activates a CGI script for a particular handler or content-type
+  # Syntax: Action action-type cgi-script
+  Action php7.fcgi /php7.fcgi virtual
+
+  #	Maps the filename extensions to the specified handler
+  # Syntax: AddHandler handler-name extension [extension] ...
+  AddHandler php7.fcgi .php
+
+  FastCGIExternalServer /var/www/cgi-bin/php7.fcgi -socket /var/run/php/php7.0-fpm.sock -pass-header Authorization -idle-timeout 3600
+
+  <Directory "/var/www/cgi-bin">
+    Require all granted
+  </Directory>
+</IfModule>
+```
+
+no need to create `/var/www/cgi-bin/php7.fcgi` if we append `virtual` to the action line
+
+This annoying thing
+
+NOTICE: Not enabling PHP 7.0 FPM by default.
+NOTICE: To enable PHP 7.0 FPM in Apache2 do:
+NOTICE: a2enmod proxy_fcgi setenvif
+NOTICE: a2enconf php7.0-fpm
+NOTICE: You are seeing this message because you have apache2 package installed.
+
+## http2
+[on ubuntu](https://techwombat.com/enable-http2-apache-ubuntu-16-04/)
+[on debian](https://http2.pro/doc/Apache)
+
+```
+sudo a2dismod mpm_prefork
+sudo a2enmod mpm_event
+sudo a2enmod http2
+```
+on vhost
+`Protocols h2 h2c http/1.1`
+
+## mysql
+
+`sudo apt-get install php-mysql`
+
+
+edit config `/etc/php/7.0/pfm/php.ini` and uncomment `;extension=php_mysqli.dll`
+
+# XDEBUG
+
+`sudo apt install php-xdebug`
+
+Config on `/etc/php/7.0/mods-available/xdebug.ini`
+
+```
+zend_extension=xdebug.so
+xdebug.remote_enable=1
+# So that it doesn't collide with fastcgi port 9000
+xdebug.remote_port=9001
+xdebug.remote_connect_back=1
+```
+Then restart
+`service php7.0-fpm restart`
+
+# Prestashop specific
+
+## MPDF
+
+mbstring
+
+```
+sudo apt-get install php-mbstring
+phpenmod mbstring
+```
+
+Enable mbstring in /etc/php/7.0/fpm/php.ini: `zend.multibyte = On`
+
+## xml
+
+`sudo apt-get install php-xml`
+
+## GD
+
+`sudo apt-get install php-gd`
+
+## mcrypt
+
+`sudo apt-get install php-mcrypt`
+
+## curl
+
+`sudo apt-get install php-curl`
+
+## imap
+
+`sudo apt-get install php-imap`
+
+#mysql 5.7
+
+https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/#repo-qg-apt-replacing
+
+### Let's encrypt
+
+[Guide to certbot on debian stretch and apache](https://certbot.eff.org/lets-encrypt/debianstretch-apache)
+
+- create the Certificates
+`sudo certbot certonly --authenticator webroot --installer apache`
+
+- configure apache virtual host
+```
+SSLEngine on
+SSLCertificateFile /etc/letsencrypt/live/moremadrid.com/cert.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/moremadrid.com/privkey.pem
+SSLCertificateChainFile /etc/letsencrypt/live/moremadrid.com/fullchain.pem
+```
+- reload apache
+
+`systemctl reload apache2`
+
+check the renewal will work
+`certbot renew --dry-run`
+
+Checklist
+1. Crear certificados y configurar apache2
+ `sudo certbot certonly --authenticator webroot --installer apache`
+2. Config apache
+```
+SSLEngine on
+SSLCertificateFile /etc/letsencrypt/live/moremadrid.com/cert.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/moremadrid.com/privkey.pem
+SSLCertificateChainFile /etc/letsencrypt/live/moremadrid.com/fullchain.pem
+```
+
+2. Habilitar http2
+  `Protocols h2 h2c http/1.1`
+3. Revisar que carga con
+  1. https://tools.keycdn.com/http2-test
+  2. https://http2.pro/client
+4. Configurar wordpress
+5. Redirigir http
+    `Redirect permanent / https://teslacoollab.com`
+5. Añadir https version en google search console
+6. Añadir https version en google analytics
+7. Cambiar URLs en google ads
+8. Revisar los errores en la consola
+9. Qué pasa con amp
+
+
+
+
+
+
+-[ ] clinicasantamarta.com - hecho, revisar errores
+-[ ] dosanaudiovisuales.com - hecho, revisar errores
+-[ ] herniasindolor.com - hecho, revisar errores
+-[ ] teslacoollab.com - hecho, revisar errores
+-[ ] urgenciasadomicilio.com  - hecho, revisar errores
+-[ ] mydoctorinmadrid.com - hecho, revisar errores
+-[ ] vamoscamino.com
+-[ ] viajesdosan.com
+-[ ] amp.urgenciasadomicilio.com
