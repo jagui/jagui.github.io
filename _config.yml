@@ -14,23 +14,36 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Juan Agüí
-author: Juan Agüí
-email: juan@juanagui.com
 description: > # this means to ignore newlines until "baseurl:"
   Juan Agüí is the co-founder of Tesla Cool Lab and loves writing about coding and education.
-baseurl: "" # the subpath of your site, e.g. /blog
+author: Juan Agüí
 url: "https://juanagui.com" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: juanagui
+baseurl: "" # the subpath of your site, e.g. /blog
+
+
 github_username:  jagui
+email: juan@juanagui.com
 google_analytics: UA-38637826-2
 avatar: juanagui.jpg
 email: juan@juanagui.com
 github: jagui
-twitter: juanagui
 linkedin: juanagui
 disqus: juanagui.disqus.com
 
-#Resume
+# Jekyll SEO
+twitter:
+  username: juanagui
+  creator: juanagui
+  card: summary
+logo: /static/img/favicon.png
+social:
+  name: Juan Agüí
+  links:
+    - https://github.com/jagui
+    - https://www.linkedin.com/in/juanagui
+    - https://twitter.com/juanagui
+
+# Resume
 name: Juan Agüí
 email_full: mailto:juan@juanagui.com
 website: juanagui.com
@@ -51,10 +64,12 @@ rdiscount:
 permalink: none
 paginate: 5
 safe: true
-gems:
+plugins:
   - jekyll-feed
   - jekyll-paginate
   - jemoji
+  - jekyll-sitemap
+  - jekyll-seo-tag
 exclude:
   - Gemfile
   - Gemfile.lock
