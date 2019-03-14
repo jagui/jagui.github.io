@@ -21,8 +21,9 @@ gem "jekyll", ">= 3.6.3"
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
-   gem "jekyll-feed", "~> 0.6"
-   gem 'github-pages'
+  gem 'github-pages'
+  gem "jekyll-feed", "~> 0.6"
+  gem 'jekyll-sitemap'
   gem 'jekyll-seo-tag'
 end
 
