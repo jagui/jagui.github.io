@@ -62,7 +62,7 @@ rdiscount:
   extensions: [smart]
 permalink: none
 paginate: 5
-safe: false
+safe: true
 plugins:
   - jekyll-feed
   - jekyll-paginate
