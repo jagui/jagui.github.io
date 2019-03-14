@@ -21,7 +21,6 @@ url: "https://juanagui.com" # the base hostname & protocol for your site, e.g. h
 baseurl: "" # the subpath of your site, e.g. /blog
 
 
-github_username:  jagui
 email: juan@juanagui.com
 google_analytics: UA-38637826-2
 avatar: juanagui.jpg
@@ -63,7 +62,7 @@ rdiscount:
   extensions: [smart]
 permalink: none
 paginate: 5
-safe: true
+safe: false
 plugins:
   - jekyll-feed
   - jekyll-paginate
