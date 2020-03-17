@@ -69,7 +69,4 @@ plugins:
   - jemoji
   - jekyll-sitemap
   - jekyll-seo-tag
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - vendor
+exclude: ['Gemfile', 'Gem.lock','vendor','.venv','.vscode']
