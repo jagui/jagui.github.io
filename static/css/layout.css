@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:700,400);
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 body {
     font-family: "Raleway", Helvetica, Arial, sans-serif;
@@ -117,28 +117,29 @@ em {
     /*margin-right: 6px;*/
 }
 
-@media print {
-    @page {
-        margin: 15mm;
-    }
-
-    body {
-        font-size: 14pt;
-        line-height: 21pt;
-    }
-
-    .container > header {
-        font-size: 80%;
-        line-height: 160%;
-    }
-
-    article > header > span {
-        font-size: 80%;
-        line-height: 80%;
-    }
-}
-
 footer p {
     margin-bottom: 10px;
     font-size: 10pt;
+}
+
+
+@media print {
+    @page {
+    }
+
+    address,
+    time {
+      color: black;
+    }
+
+    body {
+        font-size: 12pt;
+        color: black;
+        zoom: 60%;
+    }
+
+
+    footer{
+      display: none !important;
+    }
 }
