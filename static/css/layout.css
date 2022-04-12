@@ -1,147 +1,149 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Raleway&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&family=Raleway&display=swap");
 
 body {
-    font-family: "Raleway", Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    line-height: 21px;
-    color: rgb(48, 48, 48);
-    border-top: 5px solid #27a822;
-    border-bottom: 5px solid #27A822;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 21px;
+  color: rgb(48, 48, 48);
+  border-top: 5px solid #27a822;
+  border-bottom: 5px solid #27a822;
 }
 
 .container {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 a {
-    text-decoration: none;
-    color: rgb(48, 48, 48); 
+  text-decoration: none;
+  color: rgb(48, 48, 48);
 }
 
 a:visited {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-a:hover, a:focus {
-    color: #27A822;
+a:hover,
+a:focus {
+  color: #27a822;
 }
 
-p, address {
-    margin-bottom: 0;
+p,
+address {
+  margin-bottom: 0;
 }
 
 .me {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    margin-bottom: 20px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  margin-bottom: 20px;
 }
 
-header > h1, section > h1 {
-    color: #27A822;
-    font-family: "Merriweather", serif;
+header > h1,
+header > h3,
+section > h2 {
+  color: #27a822;
+  font-family: "Merriweather", serif;
 }
 
 header > h1 {
-    line-height: 100%;
-    font-size: 250%;
-    margin-bottom: 20px;
+  line-height: 100%;
+  font-size: 250%;
+  margin-bottom: 20px;
 }
 
-.container > header p, .container > header address {
-    margin-bottom: 10px;
+.container > header p,
+.container > header address {
+  margin-bottom: 10px;
 }
 
 .container > header p:last-child {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 section {
-    margin-top:0;
-    margin-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
-section > h1 {
-    font-size: 140%;
-    line-height: 120%;
-    text-transform: uppercase;
-    margin-top: 20px;
-    margin-bottom: 10px;
+section > h2 {
+  font-size: 140%;
+  line-height: 120%;
+  text-transform: uppercase;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
-
 
 article {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
-article > header > h1 {
-    font-size: 112%;
-    font-weight: bold;
-    line-height: 150%;
-    margin-top: 10px;
-    margin-bottom: 0;
-    color: inherit;
+article > header > h3 {
+  font-size: 112%;
+  font-weight: bold;
+  line-height: 150%;
+  margin-top: 10px;
+  margin-bottom: 0;
+  color: inherit;
 }
 
 article > header > span + span {
-    margin-left: 2px;
+  margin-left: 2px;
 }
 
 article > header > span + span::before {
-    content: '@';
-    margin-right: 4px;
+  content: "@";
+  margin-right: 4px;
 }
 
 article > header > span {
-    color: #808080;
-    font-size: 100%;
+  color: #808080;
+  font-size: 100%;
 }
 
 article > header > span a {
-    color: inherit;
+  color: inherit;
 }
 
 article > header address {
-    display: inline;
+  display: inline;
 }
 
 article > header address + time {
-    margin-left: 6px;
+  margin-left: 6px;
 }
 
 article > header address + time::before {
-    content: '—';
-    margin-right: 6px;
+  content: "—";
+  margin-right: 6px;
 }
 
 em {
-    font-style: normal;
-    font-weight: bold;
-    color: rgb(100, 100, 100);
-    /*margin-right: 6px;*/
+  font-style: normal;
+  font-weight: bold;
+  color: rgb(100, 100, 100);
+  /*margin-right: 6px;*/
 }
 
 footer p {
-    margin-bottom: 10px;
-    font-size: 10pt;
+  margin-bottom: 10px;
+  font-size: 10pt;
 }
 
-
 @media print {
-    @page {
-    }
+  @page {
+  }
 
+  body {
+    color: black;
+    zoom: 60%;
+    border: 0;
+    margin-top: 50px;
+  }
 
-    body {
-        color: black;
-        zoom: 60%;
-        border:0;
-        margin-top: 50px;
-    }
-
-    footer{
-      display: none !important;
-    }
+  footer {
+    display: none !important;
+  }
 }
