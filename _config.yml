@@ -23,37 +23,25 @@ baseurl: "" # the subpath of your site, e.g. /blog
 
 email: juan@juanagui.com
 google_analytics: UA-38637826-2
-avatar: retrato-2021-square.jpg
+avatar: retrato-2021.png
 email: juan@juanagui.com
 github: jagui
 linkedin: juanagui
 disqus: juanagui.disqus.com
 
 # Jekyll SEO
-twitter:
-  username: juanagui
-  creator: juanagui
-  card: summary
 logo: /static/img/favicon.png
 social:
   name: Juan Agüí
   links:
     - https://github.com/jagui
     - https://www.linkedin.com/in/juanagui
-    - https://twitter.com/juanagui
 
 # Resume
 name: Juan Agüí
 email_full: mailto:juan@juanagui.com
 website: juanagui.com
 website_full: http://juanagui.com
-tel: +34 669 528872
-tel_full: tel:+34669528872
-google_maps: 'https://goo.gl/maps/vh8cikt7sP82'
-address: C/Monasterio de las Batuecas 15
-postcode: 28049
-city: Madrid
-country: Spain
 
 # Build settings
 markdown: kramdown
